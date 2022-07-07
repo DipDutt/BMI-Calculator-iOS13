@@ -13,16 +13,27 @@ struct CalculatorBrain {
     var bmi: BMI?
     
     func getBMIValue() -> String {
-        let bmiTo1DecimalPlace = String(format: "%.1f", bmi?.value ?? 0.0)
+        //optional binding
+        if let safeValue = bmi?.value {
+        let bmiTo1DecimalPlace = String(format: "%.1f", safeValue)
         return bmiTo1DecimalPlace
+    }
+        
+        else {
+             return "0.0"
+        }
+        
     }
     
     func getAdvice() -> String {
+        
+        //optinal chaining and nil coalecsing.
+        
         return bmi?.advice ?? "No advice"
     }
     
     func getColor() -> UIColor {
-        return bmi?.color ?? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        return bmi?.color ?? UIColor.white
     }
     
     mutating func calculateBMI(height: Float, weight: Float) {
